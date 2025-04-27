@@ -1,9 +1,10 @@
 import Image from "next/image";
 import logo from "../public/sql-logo.png";
+import styles from "./header.module.css";
 
 const Header = () => {
   return (
-    <header>
+    <header className={styles.container}>
       <Image
         src={logo}
         alt="quiz logo"
