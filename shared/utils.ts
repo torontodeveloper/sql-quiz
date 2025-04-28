@@ -2,8 +2,9 @@
 
 import questionsList from '../app/questions'
 
-export function calculateScore(userAnswers:string[]){
+export function calculateScore(userAnswers:string[],totalQuestions:number){
     let score=0;
+    let percentage =0
     for(const question of questionsList){
         for(const answer of userAnswers){
             if(question.answers[0]==answer){
@@ -12,5 +13,6 @@ export function calculateScore(userAnswers:string[]){
         }
     }
     console.log('score is',score)
-    return score
+    percentage = (score/totalQuestions)*100
+    return percentage+'%'
 }

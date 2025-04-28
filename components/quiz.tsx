@@ -5,11 +5,11 @@ import questionsList from "../app/questions";
 import { calculateScore } from "@/shared/utils";
 import quizDone from "../public/quiz-done.jpg";
 import Image from "next/image";
+import Dashboard from "@/app/dashboard/page";
 
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [summary, setSummary] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
   const [activeQuestionIndex, setActiveQuestionIndex] = useState<number>(
     userAnswers.length
   );
@@ -27,9 +27,7 @@ const Quiz = () => {
       setSummary(true);
     }
   }, [activeQuestionIndex]);
-  function handleEmail() {
-    
-  }
+
   return (
     <div id="quiz">
       <div id="question">
@@ -64,17 +62,10 @@ const Quiz = () => {
             priority={true}
           />
           <p>Your Final Score is</p>
-          <h2>{calculateScore(userAnswers)}</h2>
+          <h2>{calculateScore(userAnswers, questionsList.length)}</h2>
         </div>
       )}
-      <label htmlFor="email">Plz enter ur email to send ur score</label>
-      <input
-        type="email"
-        name="email"
-        id="email"
-        value={email}
-        onChange={handleEmail}
-      />
+      {summary && <Dashboard />}
     </div>
   );
 };
