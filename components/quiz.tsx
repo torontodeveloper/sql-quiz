@@ -9,6 +9,7 @@ import Image from "next/image";
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [summary, setSummary] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
   const [activeQuestionIndex, setActiveQuestionIndex] = useState<number>(
     userAnswers.length
   );
@@ -26,6 +27,9 @@ const Quiz = () => {
       setSummary(true);
     }
   }, [activeQuestionIndex]);
+  function handleEmail() {
+    
+  }
   return (
     <div id="quiz">
       <div id="question">
@@ -63,6 +67,14 @@ const Quiz = () => {
           <h2>{calculateScore(userAnswers)}</h2>
         </div>
       )}
+      <label htmlFor="email">Plz enter ur email to send ur score</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        value={email}
+        onChange={handleEmail}
+      />
     </div>
   );
 };
