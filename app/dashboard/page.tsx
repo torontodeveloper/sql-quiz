@@ -7,10 +7,10 @@ const Dashboard = () => {
   function handleEmail(event: React.ChangeEvent<HTMLInputElement>) {
     setEmail(event.target.value);
   }
-  function handleSubmitEmail(event: React.ChangeEvent<HTMLInputElement>) {
-    console.log("email", event.target.value);
-    setEmail(event.target.value);
-  }
+  //   function handleSubmitEmail(event: React.ChangeEvent<HTMLInputElement>) {
+  //     console.log("email", event.target.value);
+  //     setEmail(event.target.value);
+  //   }
   return (
     <div>
       <>
@@ -23,11 +23,7 @@ const Dashboard = () => {
           onChange={handleEmail}
         />
         <br />
-        <Link href="/finalpage">
-          <button type="submit" onClick={handleSubmitEmail}>
-            Click Me!!!
-          </button>
-        </Link>
+        <Link href="/finalpage">Click Me!!!</Link>
       </>
     </div>
   );

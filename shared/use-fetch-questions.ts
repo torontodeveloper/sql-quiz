@@ -8,7 +8,8 @@ interface QuestionListInterface {
     answer:string[]
 }
 const useFetchQuestion=()=>{
-    const [questions,setQuestions] = useState<QuestionListInterface[]>([])
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [questions,setQuestions] = useState<QuestionListInterface[]|any>([])
     async function fetchQuestions(){
        const resp =  await axios.get('../app/questions.js')
        const questions = resp
@@ -17,7 +18,7 @@ const useFetchQuestion=()=>{
     useEffect(()=>{
         const resp = fetchQuestions()
         setQuestions([...questions,resp])
-    })
+    },[questions])
 
     return {}
 }
