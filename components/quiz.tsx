@@ -6,21 +6,23 @@ import { calculateScore } from "@/shared/utils";
 import quizDone from "../public/quiz-done.jpg";
 import Image from "next/image";
 import Dashboard from "@/app/dashboard/page";
+import { Button } from "@/stories/Button";
+import { Checkbox } from "@/stories/Checkbox";
 
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [summary, setSummary] = useState<boolean>(false);
+  const [checked, setChecked] = useState(false);
   const [activeQuestionIndex, setActiveQuestionIndex] = useState<number>(
     userAnswers.length
   );
   function handleRadio(event: React.ChangeEvent<HTMLInputElement>) {
     setUserAnswers((prevState) => [...prevState, event?.target?.value]);
-    console.log("answer", event.target.value);
+    setChecked(true);
   }
 
   useEffect(() => {
     setActiveQuestionIndex(userAnswers.length);
-    console.log("questoin index", userAnswers.length);
   }, [userAnswers.length]);
   useEffect(() => {
     if (activeQuestionIndex == questionsList.length) {
@@ -29,7 +31,8 @@ const Quiz = () => {
   }, [activeQuestionIndex]);
 
   return (
-    <div id="quiz">
+    <div id="quiz" data-testid="quiz">
+      <h1>Quiz</h1>
       <div id="question">
         <form>
           <h2>{questionsList[activeQuestionIndex]?.text}</h2>
@@ -38,13 +41,12 @@ const Quiz = () => {
               (answer, index) => (
                 <label key={index} className="label">
                   <div id="answers">
-                    <input
-                      type="radio"
-                      value={answer}
-                      name={`question-${activeQuestionIndex}`}
+                    <Checkbox
+                      label={answer}
+                      primary
+                      checked={checked}
                       onChange={handleRadio}
                     />
-                    <span className="answer">{answer}</span>
                   </div>
                 </label>
               )
@@ -66,6 +68,8 @@ const Quiz = () => {
         </div>
       )}
       {summary && <Dashboard />}
+      <Button label="Click Mee" primary={true} size="large" />
+      <Button label="Reset" primary={false} size="small" />
     </div>
   );
 };
