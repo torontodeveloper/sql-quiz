@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useCallback, useState } from "react";
 import questionsList from "../app/questions";
 import { calculateScore } from "@/shared/utils";
 import quizDone from "../public/quiz-done.jpg";
@@ -8,6 +8,7 @@ import Image from "next/image";
 import Dashboard from "@/app/dashboard/page";
 import { Button } from "@/stories/Button";
 import { Checkbox } from "@/stories/Checkbox";
+import QuestionTimer from "./question-timer";
 
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
@@ -16,9 +17,19 @@ const Quiz = () => {
   const [activeQuestionIndex, setActiveQuestionIndex] = useState<number>(
     userAnswers.length
   );
-  function handleRadio(event: React.ChangeEvent<HTMLInputElement>) {
-    setUserAnswers((prevState) => [...prevState, event?.target?.value]);
-    setChecked(true);
+  const shuffledAnswers = [...questionsList];
+  useEffect(() => {
+    shuffledAnswers.sort(() => Math.random() - 0.5);
+  }, []);
+
+  function handleRadio(
+    event: React.ChangeEvent<HTMLInputElement>,
+    index: string,
+    answer: string
+  ) {
+    console.log("event", event.target.value, index);
+    setUserAnswers((prevState) => [...prevState, answer]);
+    setChecked(!checked);
   }
 
   useEffect(() => {
@@ -29,15 +40,17 @@ const Quiz = () => {
       setSummary(true);
     }
   }, [activeQuestionIndex]);
+  const handleSkipAnswer = useCallback(handleRadio, []);
 
   return (
     <div id="quiz" data-testid="quiz">
       <h1>Quiz</h1>
       <div id="question">
+        <QuestionTimer timer={10000} timeoutCallback={handleSkipAnswer} />
         <form>
           <h2>{questionsList[activeQuestionIndex]?.text}</h2>
           <ul>
-            {questionsList[activeQuestionIndex]?.answers?.map(
+            {shuffledAnswers[activeQuestionIndex]?.answers?.map(
               (answer, index) => (
                 <label key={index} className="label">
                   <div id="answers">
@@ -45,7 +58,10 @@ const Quiz = () => {
                       label={answer}
                       primary
                       checked={checked}
-                      onChange={handleRadio}
+                      onChange={(
+                        event: ChangeEvent<HTMLInputElement>,
+                        index: string
+                      ) => handleRadio(event, index, answer)}
                     />
                   </div>
                 </label>

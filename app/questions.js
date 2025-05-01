@@ -8,6 +8,7 @@ const questions= [
         'A framework for developing mobile applications.',
         'A hardware device for data storage.',
       ],
+      solution:'A software used to create and maintain the database.'
     },
     {
       id: 'q2',
@@ -18,6 +19,7 @@ const questions= [
         '2000',
         '500',
       ],
+      solution:'1000'
     },
     {
       id: 'q3',
@@ -28,6 +30,7 @@ const questions= [
         'SELECT',
         'UPDATE',
       ],
+      solution:'CREATE'
     },
     {
       id: 'q4',
@@ -38,6 +41,7 @@ const questions= [
         'DML',
         'TCL',
       ],
+      solution:'DRL / DQL'
     },
     {
       id: 'q5',
@@ -48,6 +52,7 @@ const questions= [
         '+',
         '&',
       ],
+      solution:'||'
     },
     {
       id: 'q6',
@@ -58,6 +63,7 @@ const questions= [
         '1000 bytes',
         '5000 bytes',
       ],
+      solution:'4000'
     },
     {
       id: 'q7',
@@ -68,6 +74,7 @@ const questions= [
         'INITCAP()',
         'LTRIM()',
       ],
+      solution:'LOWER()'
     },
     {
       id: 'q8',
@@ -78,6 +85,7 @@ const questions= [
         'VARCHAR2',
         'CHAR',
       ],
+      solution:'CLOB'
     },
     {
       id: 'q9',
@@ -88,6 +96,7 @@ const questions= [
         'SAVEPOINT',
         'TRUNCATE',
       ],
+      solution:'COMMIT'
     },
     {
       id: 'q10',
@@ -98,6 +107,7 @@ const questions= [
         'UPDATE',
         'DELETE',
       ],
+      solution:'SELECT'
     },
   ];
   

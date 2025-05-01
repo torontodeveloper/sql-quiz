@@ -29,12 +29,11 @@ export const Checkbox = ({
     ? "storybook-button--primary"
     : "storybook-button--secondary";
   useEffect(() => {
-    console.log("local check **********", localcheck);
     setLocalchecked(false);
     return () => {
       setLocalchecked(false);
     };
-  }, []);
+  }, [localcheck]);
   return (
     <>
       <input
