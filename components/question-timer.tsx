@@ -7,17 +7,20 @@ interface QuestionProps {
 
 const QuestionTimer = ({ timer = 0, timeoutCallback }: QuestionProps) => {
   const [remainingTime, setRemainingTime] = useState<number>(timer);
-
+  console.log("Question Timer*************", timer);
   useEffect(() => {
     console.log("setting TIMEOUT*****");
     setTimeout(timeoutCallback, timer);
-  }, [timeoutCallback, timer]);
+  }, []);
 
   useEffect(() => {
     console.log("SETTING INTERVAL");
-    setInterval(() => {
+    const timeIntervalRef = setInterval(() => {
       setRemainingTime((prevState: number) => prevState - 100);
     }, 100);
+    return () => {
+      //   clearInterval(timeIntervalRef);
+    };
   }, []);
   return (
     <div>
